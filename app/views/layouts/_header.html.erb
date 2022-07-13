@@ -1,0 +1,36 @@
+ <nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <%=  link_to root_path  do %> 
+        <%= image_tag "inst_logo_main.png", height: 300, width: 200, class: "Logo" %>
+        <% end %>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+      <%= link_to destroy_user_session_path, method: :delete  do %>
+        <%= image_tag "exit.png", height: 40, width: 40, :class=> "img-exit" %>
+        <% end %>
+      <%=  link_to edit_user_registration_path  do %> 
+        <%= image_tag "cog.png", height: 40, width: 40, class: "iconSettings" %>
+        <% end %>
+      <%=  link_to users_path  do %> 
+        <%= image_tag "users.png", height: 40, width: 40, class: "Users" %>
+        <% end %>
+      <%=  link_to new_post_path  do %> 
+        <%= image_tag "add4.png", height: 40, width: 40, class: "NewPost" %>
+        <% end %>
+      <%=  link_to root_path do %> 
+        <%= image_tag "Home-icon.png", height: 40, width: 40, class: "iconHome" %>
+        <% end %> 
+      
+        <% if current_user.avatar.present? %>
+        <%= image_tag(current_user.avatar, height: 60, width: 60, :class=> "img-circular") %>
+        <% else %>
+        <%= image_tag "default-avatar.png", height: 60, width: 60, :class=> "img-circular"%> 
+        <% end %> 
+       <b> <%= current_user.name%> </b>
+       <%= "Followers: "%> <%=current_user.followers.count%> <%= "Subscribes: "%> <%=current_user.followees.count%>
+       
+      </div>
+    </div>
+  </div>
+</nav>

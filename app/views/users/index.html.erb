@@ -1,0 +1,22 @@
+<h1>U</h1>
+<h1>User List</h1>
+<% @users.each do |user| %>
+<section>
+    <% if user.avatar.present? %>
+        <%= image_tag(user.avatar, height: 100, width: 100, :class=> "img_avatar") %>
+        <h5><%= user.name %> <%=" Followers: "%> <%= user.followers.count%> </h5>
+    <%else %>
+        <%= image_tag "default-avatar.png", height: 100, width: 100, :class=> "img_avatar"%>
+        <h5><%= user.name %> <%=" Followers: "%> <%= user.followers.count%> </h5>
+    <%end%>
+    <%if current_user.name != user.name%>
+      <% if current_user.followees.include?(user) %>
+      <%= button_to "Unfollow", unfollow_user_path(user.id), method: "POST" %>
+      <% else %>
+     <%= button_to "Follow", follow_user_path(user.id), method: "POST"  %>
+      <% end %>
+    <% end %>
+    <br>
+ </section>
+
+<% end %>

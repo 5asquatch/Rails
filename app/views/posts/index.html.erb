@@ -1,0 +1,36 @@
+<table>
+    <thead>
+    <tr>
+        <th>Feed</th>
+    </tr>
+   </thead> 
+    <tbody>
+        <% @posts.each do |post| %>
+            <tr>
+                <td>
+                <%= image_tag(post.photo, height: 800, width: 1000) %> 
+                <div><b><%= post.title %></b></div> 
+                <%= post.body %>
+                <i><b><div><%= "Author: " %> <%= post.user.name %></div></b><i>
+                <% pre_like = post.likes.find {|like| like.user_id == current_user.id}%>
+                  <% if pre_like%> 
+                    <div><%= image_tag "Like_enabled.png", height: 25, width: 25 %>
+                    <%else%>
+                    <div><%= image_tag "Like_disabled.png", height: 25, width: 25 %>
+                  <% end %>
+                <%= (post.likes.count) == 1 ? "Like" : "Likes" %>  <%= post.likes.count %> </div>
+                <div> <%= post.created_at %>  
+                <% if post.owner?(current_user)%>
+                    <%=  link_to edit_post_path(post) do %> 
+                        <%= image_tag "edit.png", height: 40, width: 40, class: "editButton" %>
+                     <% end %> 
+                <% end %>
+                <div>
+                <%=  link_to post_path(post) do %> 
+                     <%= image_tag "eye2.png", height: 60, width: 60, class: "showButton" %>
+                <% end %> 
+                </div>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

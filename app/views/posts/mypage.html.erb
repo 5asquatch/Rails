@@ -1,0 +1,21 @@
+<h1>My Page</h1>
+<% if current_user.avatar.present? %>
+        <%= image_tag(current_user.avatar, height: 200, width: 200, class: "rounded-circle") %>
+        <% else %>
+        <%= image_tag "default-avatar.png", height: 200, width: 200 %> 
+        <% end %> <h1><%= current_user.name %></h1>
+        <%= "Followers: "%>
+        <%= "Subscribes: "%>
+<%= link_to "New Post", new_post_path %>
+    
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Body</th>
+        <th>Author</th>
+        <th>Created_at</th>
+        <th>Updated_at</th>
+    </tr> 
+ 

@@ -1,0 +1,53 @@
+<h1>POST</h1>
+    <% if @post.photo.present? %>
+    <div>
+    <%= image_tag(@post.photo , height: 1200, width: 1000, class: "rounded-circle") %>
+    <% end %>
+    </div>
+    <div>
+    <%= @post.title %>
+    </div>
+    <div>
+    <%= @post.body %>
+    </div>
+    <div>
+   <b> <%= @post.user.name %> </b>
+    </div>
+
+<p><%= @post.likes.count %> <%= (@post.likes.count) == 1 ? "Like" : "Likes" %> </p>
+<% pre_like = @post.likes.find {|like| like.user_id == current_user.id}%>
+<% if pre_like%>
+    <%= button_to "Unlike", post_like_path(@post, pre_like), method: :delete%>
+<% else %>
+    <%= button_to "Like", post_likes_path(@post), method: :post%>
+<%end%>    
+
+<% if @post.user.name == current_user.name %>
+    <%= button_to "Delete Post", post_path(@post), method: :delete %>
+<% end %>
+
+
+<h1>Comments</h1>
+<ul>
+     <% @post.comments.each do |comment| %>
+    <li>
+    <%= comment.user.name%><%=": "  %> 
+    <%= comment.body  %> 
+    <% if comment.user.name == current_user.name%>
+    <%= button_to "Delete", post_comment_path(@post, @post), method: :delete%>
+    <% else %>
+    <%end%>
+    </li>
+    <% end %>
+</ul>
+
+<%= form_with model: @post.comments.build, url: [@post, @post.comments.build ] do |f| %> 
+    <div>
+    <%= f.label :body %> 
+    <%= f.text_area :body %> 
+    </div> 
+    <div>
+    <%= f.submit %> 
+    </div> 
+    <% end %>
+<%= link_to "Back", posts_path %> 
