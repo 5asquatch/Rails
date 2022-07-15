@@ -3,9 +3,8 @@ Rails.application.routes.draw do
   devise_for :users
 
   root to: "posts#index"
-  get "/comments", to: "comments#index"
-  get "/mypage", to: "posts#mypage"
   get "/users", to: "users#index"
+  get "users/:id", to: "users#user", as: "user"
   resources :users
   post '/users/:id/follow', to: "users#follow", as: "follow_user"
   post '/users/:id/unfollow', to: "users#unfollow", as: "unfollow_user"

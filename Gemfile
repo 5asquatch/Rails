@@ -15,6 +15,7 @@ gem 'devise'
 gem "webpacker",  "~> 5.0"
 
 
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.4.1'
@@ -49,6 +50,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem "pry-byebug"
   gem "pry-rails"
+  
 end
 
 group :development do
@@ -66,7 +68,14 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
+  # gem 'chromedriver-helper'
+  gem 'rspec-rails', '~> 5.1.2'
+  gem 'factory_bot_rails'
+  gem 'ffaker'
+end
+
+group :production do
+  gem "pg", "~> 1.4.1"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
